@@ -64,7 +64,7 @@ class RockPaperScissorsViewController: UIViewController {
         //Here are the 3 ways of presenting a View Controller
         
         // 1st Way: Programmatic View Controller Presentation
-        if (playersMove == RPS.rock) {
+        if (playersMove != nil) {
             // Get the storyboard and ResultViewController
             let storyboard = UIStoryboard (name: "Main", bundle: nil)
             let resultVC = storyboard.instantiateViewController(withIdentifier: "ResultViewController") as! ResultViewController
@@ -87,7 +87,15 @@ class RockPaperScissorsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //Notice that this code works for both Scissors and Paper
+        if segue.identifier == "ResultsViewController" {
         let controller = segue.destination as! ResultViewController
         controller.match = self.match
+        }
+        print("got to here")
+        if segue.identifier == "historyViewController" {
+            let controller = segue.destination as! HistoryViewController
+            controller.history = self.history
+            print("Reached here")
+        }
     }
 }
